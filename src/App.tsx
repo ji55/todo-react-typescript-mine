@@ -1,18 +1,18 @@
 import React, { ChangeEvent } from 'react';
 import { GlobalStyle } from './App.style'
-import { TextField, Button  } from '@material-ui/core';
+import { TextField, Button } from '@material-ui/core';
+import { Rating } from '@material-ui/lab';
 import { useState } from 'react';
 import { TodoListItem } from './todoListItem'
 
-const initialTodos: Array<Todo> = [
-
-]
+const initialTodos: Array<Todo> = []
 
 
 export const App: React.FC = () => {
   const [todos, setTodos] = useState(initialTodos)
   const [newTodo, setNewTodo] = useState('')
   const [count, setCount] = useState(0)
+  const [rating, setRating] = useState(0) || undefined
 
   const toggleTodo: ToggleTodo = selectedTodo => {
     const newTodos = todos.map(todo => {
@@ -38,15 +38,21 @@ export const App: React.FC = () => {
   const handleSubmit = (e: any) => {
     if (e._reactName === "onKeyPress") {
       if (e.key === "Enter") {
-        setTodos([...todos, {text: newTodo, complete: false, id: count, importance: 1}])
+        setTodos([...todos, {text: newTodo, complete: false, id: count, importance: rating}])
         setNewTodo("")
         setCount(count+1)
+        setRating(0)
       }
     } else {
-      setTodos([...todos, {text: newTodo, complete: false, id: count, importance: 1}])
+      setTodos([...todos, {text: newTodo, complete: false, id: count, importance: rating}])
       setNewTodo("")
       setCount(count+1)
+      setRating(0)
     }
+  }
+
+  const handleRating = (e: any) => {
+    setRating(e.target.value)
   }
 
 
@@ -54,6 +60,8 @@ export const App: React.FC = () => {
     <div className="App">
       <GlobalStyle />
       <h1>TODO</h1>
+      <Rating name="rating" size="small" onChange={handleRating} value={rating} />
+      <br />
       <TextField type="text" onChange={handleChange} onKeyPress={handleSubmit} value={newTodo} variant="outlined" size="small" />
       <Button type="submit" onClick={handleSubmit}>추가</Button>
       <ul>
