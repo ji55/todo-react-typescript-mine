@@ -6,9 +6,11 @@ import "./todoListItem.css"
 interface TodoListItemProps {
   todo: Todo
   toggleTodo: ToggleTodo
+  deleteTodo: DeleteTodo
 }
 
-export const TodoListItem: React.FC<TodoListItemProps> = ({todo, toggleTodo}) => {
+export const TodoListItem: React.FC<TodoListItemProps> = ({todo, toggleTodo, deleteTodo}) => {
+
   return (
     <ul>
       <Checkbox
@@ -22,7 +24,7 @@ export const TodoListItem: React.FC<TodoListItemProps> = ({todo, toggleTodo}) =>
       >
         {todo.text}
       </span>
-      <IconButton color="secondary" size="small">
+      <IconButton color="secondary" size="small" onClick={()=>deleteTodo(todo)}>
         <Close fontSize="inherit" />
       </IconButton>
     </ul>

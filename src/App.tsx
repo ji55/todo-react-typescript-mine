@@ -27,6 +27,10 @@ export const App: React.FC = () => {
     setTodos(newTodos)
   } 
 
+  const deleteTodo: DeleteTodo = deleteTodo => {
+    setTodos(todos.filter(todo => todo.id !== deleteTodo.id))
+  }
+
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setNewTodo(e.target.value)
   }
@@ -46,7 +50,6 @@ export const App: React.FC = () => {
   }
 
 
-
   return (
     <div className="App">
       <GlobalStyle />
@@ -55,7 +58,7 @@ export const App: React.FC = () => {
       <Button type="submit" onClick={handleSubmit}>추가</Button>
       <ul>
         {todos.map(todo => {
-          return <TodoListItem key={todo.id} todo={todo} toggleTodo={toggleTodo} />
+          return <TodoListItem key={todo.id} todo={todo} toggleTodo={toggleTodo} deleteTodo={deleteTodo}/>
         })}
       </ul>
     </div>
