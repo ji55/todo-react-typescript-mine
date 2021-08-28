@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import { GlobalStyle } from './App.style'
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button  } from '@material-ui/core';
 import { useState } from 'react';
 import { TodoListItem } from './todoListItem'
 
@@ -13,6 +13,19 @@ export const App: React.FC = () => {
   const [todos, setTodos] = useState(initialTodos)
   const [newTodo, setNewTodo] = useState('')
   const [count, setCount] = useState(0)
+
+  const toggleTodo: ToggleTodo = selectedTodo => {
+    const newTodos = todos.map(todo => {
+      if (todo === selectedTodo) {
+        return {
+          ...todo,
+          complete: !todo.complete
+        }
+      }
+      return todo
+    })
+    setTodos(newTodos)
+  } 
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setNewTodo(e.target.value)
@@ -42,7 +55,7 @@ export const App: React.FC = () => {
       <Button type="submit" onClick={handleSubmit}>추가</Button>
       <ul>
         {todos.map(todo => {
-          return <TodoListItem key={todo.id} todo={todo}/>
+          return <TodoListItem key={todo.id} todo={todo} toggleTodo={toggleTodo} />
         })}
       </ul>
     </div>
