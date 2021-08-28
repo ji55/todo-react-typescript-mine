@@ -1,6 +1,6 @@
 import React from 'react';
-import { Checkbox, IconButton } from '@material-ui/core';
-import { Close } from '@material-ui/icons';
+import { IconButton } from '@material-ui/core';
+import { Close, Check } from '@material-ui/icons';
 import "./todoListItem.css"
 
 interface TodoListItemProps {
@@ -12,21 +12,43 @@ interface TodoListItemProps {
 export const TodoListItem: React.FC<TodoListItemProps> = ({todo, toggleTodo, deleteTodo}) => {
 
   return (
-    <ul>
-      <Checkbox
-        color="primary"
-        checked={todo.complete}
-        onChange={() => toggleTodo(todo)}
-      />
-      <span 
+    <div className="listItem">
+      <p
         className={todo.complete ? "complete" : undefined}
         onClick={() => toggleTodo(todo)}
       >
         {todo.text}
-      </span>
-      <IconButton color="secondary" size="small" onClick={()=>deleteTodo(todo)}>
-        <Close fontSize="inherit" />
-      </IconButton>
-    </ul>
+      </p>
+      { todo.complete ? 
+        <div className="complete">
+          <IconButton 
+            size="small" 
+            disabled
+            >
+            <Check fontSize="inherit" />
+          </IconButton>
+          <span className="rating">⭐{todo.importance}</span>
+          <IconButton 
+            color="secondary" 
+            size="small" 
+            onClick={()=>deleteTodo(todo)}
+            className="completeDelete"
+            >
+            <Close fontSize="inherit" />
+          </IconButton>
+        </div>
+        : <div>
+          <span className="rating">⭐{todo.importance}</span>
+          <IconButton 
+            color="secondary" 
+            size="small" 
+            onClick={()=>deleteTodo(todo)}
+            className="deleteBtn"
+            >
+            <Close fontSize="inherit" />
+          </IconButton>
+        </div>
+      }
+    </div>
   )
 }

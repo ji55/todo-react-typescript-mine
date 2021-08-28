@@ -1,9 +1,9 @@
 import React, { ChangeEvent } from 'react';
-import { GlobalStyle } from './App.style'
 import { TextField, Button } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
 import { useState } from 'react';
-import { TodoListItem } from './todoListItem'
+import { TodoListItem } from './todoListItem';
+import "./App.css"
 
 const initialTodos: Array<Todo> = []
 
@@ -58,17 +58,18 @@ export const App: React.FC = () => {
 
   return (
     <div className="App">
-      <GlobalStyle />
       <h1>TODO</h1>
+      <p>Todos are for careful people,<br />
+        not passionate ones.</p>
       <Rating name="rating" size="small" onChange={handleRating} value={rating} />
       <br />
       <TextField type="text" onChange={handleChange} onKeyPress={handleSubmit} value={newTodo} variant="outlined" size="small" />
       <Button type="submit" onClick={handleSubmit}>추가</Button>
-      <ul>
+      <div>
         {todos.map(todo => {
           return <TodoListItem key={todo.id} todo={todo} toggleTodo={toggleTodo} deleteTodo={deleteTodo}/>
         })}
-      </ul>
+      </div>
     </div>
   );
 }

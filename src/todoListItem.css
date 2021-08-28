@@ -5,3 +5,35 @@
 .deleteIcon {
   align-items: center;
 }
+
+ul {
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.listItem {
+  width: 285px;
+  background-color: rgb(175, 217, 244);
+  border-radius: 5px;
+  margin-top: 10px;
+  white-space: pre-line;
+  padding: 15px;
+}
+
+.listItem > p {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.deleteBtn {
+  margin-left: 229px !important;
+}
+
+.completeDelete {
+  margin-left: 205px !important;
+}
+
+.rating {
+  color: darkred;
+}
